@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Guide Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .search-box {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1em;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            transition: border-color 0.3s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .guide-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .guide-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .guide-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .guide-card p {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .guide-card .category {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-bottom: 15px;
+        }
+
+        .guide-card .view-btn {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .guide-card .view-btn:hover {
+            background: #5568d3;
+        }
+
+        .no-results {
+            text-align: center;
+            color: white;
+            font-size: 1.2em;
+            padding: 40px;
+            display: none;
+        }
+
+        .instructions {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .instructions h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .instructions p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .instructions code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 User Guide Hub</h1>
+            <p>Your centralized resource for all company user guides</p>
+        </header>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔍 Search guides by title, description, or category...">
+        </div>
+
+        <div class="guides-grid" id="guidesGrid"></div>
+        
+        <div class="no-results" id="noResults">
+            No guides found matching your search.
+        </div>
+
+        <div class="instructions">
+            <h2>📝 How to Update Guides</h2>
+            <p><strong>To add or edit guides:</strong></p>
+            <p>1. Right-click this page and select "View Page Source" or "Inspect"</p>
+            <p>2. Find the <code>guides</code> array in the JavaScript section</p>
+            <p>3. Add new guides or modify existing ones using this format:</p>
+            <pre style="background: #f5f5f5; padding: 15px; border-radius: 6px; overflow-x: auto; margin: 15px 0;">
+{
+    title: "Guide Title",
+    description: "Brief description of what this guide covers",
+    category: "Department/Category",
+    pdfUrl: "path/to/your/file.pdf"
+}</pre>
+            <p>4. Save the file and refresh the page</p>
+            <p><strong>Note:</strong> Replace the <code>pdfUrl</code> with either a relative path (if PDFs are in the same folder) or a full URL to where your PDF is hosted.</p>
+        </div>
+    </div>
+
+    <script>
+        // ========================================
+        // EDIT THIS SECTION TO ADD/UPDATE GUIDES
+        // ========================================
+        const guides = [
+            {
+                title: "Getting Started Guide",
+                description: "Essential information for new employees including setup procedures, system access, and first-day orientation materials.",
+                category: "Onboarding",
+                pdfUrl: "guides/getting-started.pdf"
+            },
+            {
+                title: "Software Installation Guide",
+                description: "Step-by-step instructions for installing and configuring required company software and development tools.",
+                category: "IT & Systems",
+                pdfUrl: "guides/software-installation.pdf"
+            },
+            {
+                title: "Project Management Workflow",
+                description: "Complete guide to our project management processes, tools, and best practices for team collaboration.",
+                category: "Operations",
+                pdfUrl: "guides/project-management.pdf"
+            },
+            {
+                title: "Security & Compliance Manual",
+                description: "Security protocols, data handling procedures, and compliance requirements for all employees.",
+                category: "Security",
+                pdfUrl: "guides/security-compliance.pdf"
+            }
+        ];
+        // ========================================
+        // END OF EDITABLE SECTION
+        // ========================================
+
+        const guidesGrid = document.getElementById('guidesGrid');
+        const searchInput = document.getElementById('searchInput');
+        const noResults = document.getElementById('noResults');
+
+        function displayGuides(guidesToShow) {
+            guidesGrid.innerHTML = '';
+            
+            if (guidesToShow.length === 0) {
+                noResults.style.display = 'block';
+                return;
+            }
+            
+            noResults.style.display = 'none';
+            
+            guidesToShow.forEach(guide => {
+                const card = document.createElement('div');
+                card.className = 'guide-card';
+                card.innerHTML = `
+                    <span class="category">${guide.category}</span>
+                    <h3>${guide.title}</h3>
+                    <p>${guide.description}</p>
+                    <a href="${guide.pdfUrl}" target="_blank" class="view-btn">View Guide →</a>
+                `;
+                guidesGrid.appendChild(card);
+            });
+        }
+
+        function searchGuides() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filtered = guides.filter(guide => 
+                guide.title.toLowerCase().includes(searchTerm) ||
+                guide.description.toLowerCase().includes(searchTerm) ||
+                guide.category.toLowerCase().includes(searchTerm)
+            );
+            displayGuides(filtered);
+        }
+
+        searchInput.addEventListener('input', searchGuides);
+
+        // Initial display
+        displayGuides(guides);
+    </script>
+</body>
+</html>
