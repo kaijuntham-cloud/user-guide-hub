@@ -1,772 +1,336 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SATS User Guide Portal</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SATS User Guide Portal</title>
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-            min-height: 100vh;
-            padding-bottom: 60px;
-        }
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
 
-        /* Header */
-        .header {
-            background: white;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            padding: 20px 0;
-            margin-bottom: 40px;
-        }
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    min-height: 100vh;
+    padding-bottom: 60px;
+}
 
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+.header {
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,.1);
+    padding: 20px 0;
+    margin-bottom: 40px;
+}
 
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
+.header-content {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        .logo {
-            height: 50px;
-            max-width: 180px;
-            object-fit: contain;
-        }
+.logo-text {
+    font-size: 28px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
-        .logo-text {
-            font-size: 28px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+.site-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1a365d;
+}
 
-        .site-title {
-            font-size: 24px;
-            font-weight: 600;
-            color: #1a365d;
-        }
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+}
 
-        .upload-button {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
-        }
+.page-header {
+    text-align: center;
+    color: white;
+    margin-bottom: 40px;
+}
 
-        .upload-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
-        }
+.page-header h1 {
+    font-size: 48px;
+    font-weight: 800;
+}
 
-        /* Main Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
 
-        /* Page Title Section */
-        .page-header {
-            text-align: center;
-            margin-bottom: 40px;
-            color: white;
-        }
+.stat-card {
+    background: white;
+    padding: 28px;
+    border-radius: 16px;
+    text-align: center;
+}
 
-        .page-header h1 {
-            font-size: 48px;
-            font-weight: 800;
-            margin-bottom: 12px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
+.stat-number {
+    font-size: 36px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
-        .page-header p {
-            font-size: 20px;
-            opacity: 0.95;
-        }
+.search-section {
+    background: white;
+    padding: 24px;
+    border-radius: 16px;
+    margin-bottom: 30px;
+}
 
-        /* Stats */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
+.search-section input {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 12px;
+    border: 2px solid #e2e8f0;
+    font-size: 16px;
+}
 
-        .stat-card {
-            background: white;
-            padding: 28px;
-            border-radius: 16px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-            text-align: center;
-            transition: all 0.3s;
-        }
+.filter-section {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
 
-        .stat-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-        }
+.filter-btn {
+    padding: 12px 28px;
+    border-radius: 25px;
+    border: none;
+    background: white;
+    font-weight: 600;
+    cursor: pointer;
+}
 
-        .stat-icon {
-            font-size: 40px;
-            margin-bottom: 12px;
-        }
+.filter-btn.active {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+}
 
-        .stat-number {
-            font-size: 36px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 8px;
-        }
+.guides-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px,1fr));
+    gap: 24px;
+}
 
-        .stat-label {
-            font-size: 14px;
-            color: #718096;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+.guide-card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+}
 
-        /* Search Box */
-        .search-section {
-            background: white;
-            padding: 24px;
-            border-radius: 16px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
+.guide-card::before {
+    content:'';
+    height:4px;
+    background: linear-gradient(90deg, #ef4444, #dc2626);
+    position:absolute;
+    top:0; left:0; right:0;
+}
 
-        .search-box {
-            position: relative;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+.guide-category {
+    display:inline-block;
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color:white;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    margin-bottom:16px;
+}
 
-        .search-box input {
-            width: 100%;
-            padding: 16px 20px 16px 50px;
-            font-size: 16px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            transition: all 0.3s;
-        }
+.guide-title {
+    font-size:22px;
+    font-weight:700;
+    margin-bottom:10px;
+}
 
-        .search-box input:focus {
-            outline: none;
-            border-color: #ef4444;
-            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
-        }
+.new-badge {
+    background:#16a34a;
+    color:white;
+    font-size:11px;
+    padding:4px 10px;
+    border-radius:12px;
+    margin-left:8px;
+}
 
-        .search-icon {
-            position: absolute;
-            left: 18px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 20px;
-        }
+.guide-description {
+    color:#718096;
+    margin-bottom:20px;
+}
 
-        /* Category Filter */
-        .filter-section {
-            margin-bottom: 30px;
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+.guide-footer {
+    display:flex;
+    justify-content:space-between;
+    border-top:2px solid #f7fafc;
+    padding-top:16px;
+}
 
-        .filter-btn {
-            padding: 12px 28px;
-            border: none;
-            background: white;
-            border-radius: 25px;
-            font-size: 15px;
-            font-weight: 600;
-            color: #4a5568;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .filter-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-
-        .filter-btn.active {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-            box-shadow: 0 4px 16px rgba(239, 68, 68, 0.4);
-        }
-
-        /* Guides Grid */
-        .guides-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 24px;
-            margin-bottom: 40px;
-        }
-
-        .guide-card {
-            background: white;
-            border-radius: 16px;
-            padding: 28px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .guide-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #ef4444, #dc2626);
-        }
-
-        .guide-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 32px rgba(0,0,0,0.15);
-        }
-
-        .guide-category {
-            display: inline-block;
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 16px;
-        }
-
-        .guide-title {
-            font-size: 22px;
-            font-weight: 700;
-            color: #1a365d;
-            margin-bottom: 12px;
-            line-height: 1.4;
-        }
-
-        .guide-description {
-            color: #718096;
-            font-size: 15px;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .guide-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 20px;
-            border-top: 2px solid #f7fafc;
-        }
-
-        .guide-date {
-            font-size: 13px;
-            color: #a0aec0;
-            font-weight: 500;
-        }
-
-        .view-btn {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-            padding: 10px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.3s;
-            display: inline-block;
-            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
-        }
-
-        .view-btn:hover {
-            transform: translateX(2px);
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
-        }
-
-        .no-results {
-            text-align: center;
-            padding: 60px 20px;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-        }
-
-        .no-results-icon {
-            font-size: 64px;
-            margin-bottom: 16px;
-        }
-
-        /* Upload Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(4px);
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 600px;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            animation: slideUp 0.3s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .modal-header {
-            padding: 28px;
-            border-bottom: 2px solid #f7fafc;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-title {
-            font-size: 24px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .close-btn {
-            background: #f7fafc;
-            border: none;
-            font-size: 28px;
-            cursor: pointer;
-            color: #718096;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 10px;
-            transition: all 0.2s;
-        }
-
-        .close-btn:hover {
-            background: #e2e8f0;
-            color: #2d3748;
-        }
-
-        .modal-body {
-            padding: 28px;
-        }
-
-        .form-group {
-            margin-bottom: 24px;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 15px;
-            font-weight: 600;
-            color: #2d3748;
-            margin-bottom: 8px;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 14px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            font-size: 15px;
-            transition: all 0.3s;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: #ef4444;
-            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
-        }
-
-        .form-textarea {
-            min-height: 100px;
-            resize: vertical;
-            font-family: inherit;
-        }
-
-        .modal-footer {
-            padding: 28px;
-            border-top: 2px solid #f7fafc;
-            display: flex;
-            justify-content: flex-end;
-            gap: 12px;
-        }
-
-        .btn {
-            padding: 12px 28px;
-            border-radius: 10px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            transition: all 0.3s;
-        }
-
-        .btn-secondary {
-            background: #e2e8f0;
-            color: #2d3748;
-        }
-
-        .btn-secondary:hover {
-            background: #cbd5e0;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
-        }
-
-        .success-msg {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-            color: white;
-            padding: 16px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            display: none;
-            font-weight: 600;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .guides-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .page-header h1 {
-                font-size: 36px;
-            }
-            
-            .header-content {
-                flex-direction: column;
-                gap: 16px;
-            }
-        }
-    </style>
+.view-btn {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color:white;
+    padding:10px 24px;
+    border-radius:8px;
+    text-decoration:none;
+}
+</style>
 </head>
+
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-content">
-            <div class="logo-section">
-                <img src="sats logo.png" alt="SATS Logo" class="logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                <div class="logo-text" style="display: none;">SATS</div>
-            </div>
-            <div class="site-title">Knowledge Portal</div>
-            <button class="upload-button" onclick="openUploadModal()">
-                ➕ Add New Guide
-            </button>
-        </div>
-    </header>
 
-    <!-- Main Content -->
-    <div class="container">
-        <!-- Page Header -->
-        <div class="page-header">
-            <h1>📚 User Guide Library</h1>
-            <p>Your one-stop hub for all documentation and guides</p>
-        </div>
-
-        <!-- Stats -->
-        <div class="stats">
-            <div class="stat-card">
-                <div class="stat-icon">📚</div>
-                <div class="stat-number" id="totalGuides">6</div>
-                <div class="stat-label">Total Guides</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon">🏷️</div>
-                <div class="stat-number">2</div>
-                <div class="stat-label">Categories</div>
-            </div>
-        </div>
-
-        <!-- Search -->
-        <div class="search-section">
-            <div class="search-box">
-                <span class="search-icon">🔍</span>
-                <input type="text" id="searchInput" placeholder="Search guides by title, description, or category...">
-            </div>
-        </div>
-
-        <!-- Category Filter -->
-        <div class="filter-section">
-            <button class="filter-btn active" onclick="filterCategory('all', event)">All Guides</button>
-            <button class="filter-btn" onclick="filterCategory('Operations', event)">🏭 Operations</button>
-            <button class="filter-btn" onclick="filterCategory('SATS System', event)">💻 SATS System</button>
-        </div>
-
-        <!-- Guides Grid -->
-        <div class="guides-grid" id="guidesGrid"></div>
-
-        <!-- No Results -->
-        <div class="no-results" id="noResults" style="display: none;">
-            <div class="no-results-icon">🔍</div>
-            <h3>No guides found</h3>
-            <p>Try adjusting your search or filter</p>
-        </div>
+<header class="header">
+    <div class="header-content">
+        <div class="logo-text">SATS</div>
+        <div class="site-title">Knowledge Portal</div>
     </div>
+</header>
 
-    <!-- Upload Modal -->
-    <div class="modal" id="uploadModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Add New Guide</h2>
-                <button class="close-btn" onclick="closeUploadModal()">×</button>
-            </div>
-            <div class="modal-body">
-                <div class="success-msg" id="successMsg">
-                    ✓ Instructions copied! Follow the steps to add your guide.
-                </div>
-                
-                <form id="uploadForm">
-                    <div class="form-group">
-                        <label class="form-label">Guide Title</label>
-                        <input type="text" class="form-input" id="guideTitle" placeholder="e.g., SATS - Inventory Management">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Description</label>
-                        <textarea class="form-input form-textarea" id="guideDescription" placeholder="Brief description of what this guide covers..."></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Category</label>
-                        <select class="form-input" id="guideCategory">
-                            <option value="Operations">Operations</option>
-                            <option value="SATS System">SATS System</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label">PDF Filename (in User Guide folder)</label>
-                        <input type="text" class="form-input" id="guidePdf" placeholder="e.g., inventory-guide.pdf">
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" onclick="closeUploadModal()">Cancel</button>
-                <button class="btn btn-primary" onclick="generateCode()">Generate Code</button>
-            </div>
-        </div>
+<div class="container">
+
+<div class="page-header">
+    <h1>📚 User Guide Library</h1>
+    <p>Your one-stop hub for all documentation</p>
+</div>
+
+<div class="stats">
+    <div class="stat-card">
+        <div class="stat-number" id="totalGuides">0</div>
+        <div>Total Guides</div>
     </div>
+</div>
 
-    <script>
-        const guides = [
-            {
-                title: "Butchery Ordering Form",
-                description: "Complete guide for ordering butchery products and managing inventory requests.",
-                category: "Operations",
-                pdfUrl: "User Guide/Butchery Ordering Form 1 (1).pdf",
-                updated: "2024-01-20"
-            },
-            {
-                title: "SATS - COOIS Report",
-                description: "Instructions for generating and interpreting COOIS reports in the SATS system.",
-                category: "SATS System",
-                pdfUrl: "User Guide/SATS- COOIS Report.pdf",
-                updated: "2024-01-22"
-            },
-            {
-                title: "SATS - Daily GR List Automate",
-                description: "Step-by-step guide for automating the daily Goods Receipt (GR) list generation process.",
-                category: "SATS System",
-                pdfUrl: "User Guide/SATS- Daily GR List Automate.pdf",
-                updated: "2024-01-23"
-            },
-            {
-                title: "SATS - Printing of Daily GR List",
-                description: "Guide for printing the daily Goods Receipt list from the SATS system.",
-                category: "SATS System",
-                pdfUrl: "User Guide/SATS- Printing of Daily GR List.pdf",
-                updated: "2024-01-21"
-            },
-            {
-                title: "SATS - Production Order Mass GR",
-                description: "Instructions for performing mass Goods Receipt for production orders in SATS.",
-                category: "SATS System",
-                pdfUrl: "User Guide/SATS- Production Order Mass GR.pdf",
-                updated: "2024-01-23"
-            },
-            {
-                title: "SATS - Enabling the Developer Tab",
-                description: "Guide on adding the developer tab on excel",
-                category: "SATS System",
-                pdfUrl: "User Guide/SATS - Enabling the Developer Tab.pdf",
-                updated: "2026-01-23"
-            }
-        ];
+<div class="search-section">
+    <input type="text" id="searchInput" placeholder="Search guides...">
+</div>
 
-        let currentFilter = 'all';
+<div class="filter-section">
+    <button class="filter-btn active" onclick="filterCategory('all', event)">All</button>
+    <button class="filter-btn" onclick="filterCategory(CATEGORIES.OPERATIONS, event)">Operations</button>
+    <button class="filter-btn" onclick="filterCategory(CATEGORIES.SATS, event)">SATS System</button>
+</div>
 
-        function displayGuides(guidesToShow) {
-            const guidesGrid = document.getElementById('guidesGrid');
-            const noResults = document.getElementById('noResults');
-            
-            guidesGrid.innerHTML = '';
-            document.getElementById('totalGuides').textContent = guidesToShow.length;
-            
-            if (guidesToShow.length === 0) {
-                guidesGrid.style.display = 'none';
-                noResults.style.display = 'block';
-                return;
-            }
-            
-            guidesGrid.style.display = 'grid';
-            noResults.style.display = 'none';
-            
-            guidesToShow.forEach(guide => {
-                const card = document.createElement('div');
-                card.className = 'guide-card';
-                card.innerHTML = `
-                    <span class="guide-category">${guide.category}</span>
-                    <h3 class="guide-title">${guide.title}</h3>
-                    <p class="guide-description">${guide.description}</p>
-                    <div class="guide-footer">
-                        <span class="guide-date">📅 ${guide.updated}</span>
-                        <a href="${guide.pdfUrl}" target="_blank" class="view-btn">View Guide →</a>
-                    </div>
-                `;
-                guidesGrid.appendChild(card);
-            });
-        }
+<div class="guides-grid" id="guidesGrid"></div>
 
-        function filterGuides() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            
-            let filtered = guides.filter(guide => {
-                const matchesSearch = guide.title.toLowerCase().includes(searchTerm) ||
-                                    guide.description.toLowerCase().includes(searchTerm) ||
-                                    guide.category.toLowerCase().includes(searchTerm);
-                const matchesCategory = currentFilter === 'all' || guide.category === currentFilter;
-                return matchesSearch && matchesCategory;
-            });
-            
-            displayGuides(filtered);
-        }
+</div>
 
-        function filterCategory(category, event) {
-            currentFilter = category;
-            
-            const buttons = document.querySelectorAll('.filter-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            filterGuides();
-        }
+<script>
+const CATEGORIES = {
+    OPERATIONS: "Operations",
+    SATS: "SATS System"
+};
 
-        function openUploadModal() {
-            document.getElementById('uploadModal').classList.add('active');
-            document.getElementById('successMsg').style.display = 'none';
-        }
+const guides = [
+    {
+        title: "Butchery Ordering Form",
+        description: "Ordering and inventory request process.",
+        category: CATEGORIES.OPERATIONS,
+        pdfUrl: "User Guide/Butchery Ordering Form 1 (1).pdf",
+        updated: "2025-09-15"
+    },
+    {
+        title: "SATS - COOIS Report",
+        description: "Generate and interpret COOIS reports.",
+        category: CATEGORIES.SATS,
+        pdfUrl: "User Guide/SATS- COOIS Report.pdf",
+        updated: "2025-09-28"
+    },
+    {
+        title: "SATS - Daily GR List Automate",
+        description: "Automating daily Goods Receipt lists.",
+        category: CATEGORIES.SATS,
+        pdfUrl: "User Guide/SATS- Daily GR List Automate.pdf",
+        updated: "2025-10-10"
+    },
+    {
+        title: "SATS - Printing of Daily GR List",
+        description: "Printing daily Goods Receipt lists.",
+        category: CATEGORIES.SATS,
+        pdfUrl: "User Guide/SATS- Printing of Daily GR List.pdf",
+        updated: "2025-10-22"
+    },
+    {
+        title: "SATS - Production Order Mass GR",
+        description: "Mass GR for production orders.",
+        category: CATEGORIES.SATS,
+        pdfUrl: "User Guide/SATS- Production Order Mass GR.pdf",
+        updated: "2025-11-05"
+    },
+    {
+        title: "SATS - Enabling the Developer Tab",
+        description: "Enable Developer tab in Excel.",
+        category: CATEGORIES.SATS,
+        pdfUrl: "User Guide/SATS - Enabling the Developer Tab.pdf",
+        updated: "2025-11-18"
+    }
+];
 
-        function closeUploadModal() {
-            document.getElementById('uploadModal').classList.remove('active');
-            document.getElementById('uploadForm').reset();
-        }
+let currentFilter = 'all';
 
-        function generateCode() {
-            const title = document.getElementById('guideTitle').value;
-            const description = document.getElementById('guideDescription').value;
-            const category = document.getElementById('guideCategory').value;
-            const pdfFile = document.getElementById('guidePdf').value;
-            
-            if (!title || !description || !pdfFile) {
-                alert('Please fill in all fields!');
-                return;
-            }
+function formatDate(d) {
+    return new Date(d).toLocaleDateString('en-SG', {
+        day:'2-digit', month:'short', year:'numeric'
+    });
+}
 
-            const today = new Date().toISOString().split('T')[0];
-            const code = `{
-    title: "${title}",
-    description: "${description}",
-    category: "${category}",
-    pdfUrl: "User Guide/${pdfFile}",
-    updated: "${today}"
-}`;
+function isNew(d) {
+    return (new Date() - new Date(d)) / 86400000 <= 120;
+}
 
-            // Copy to clipboard
-            navigator.clipboard.writeText(code);
-            
-            // Show success
-            document.getElementById('successMsg').style.display = 'block';
-            
-            alert(`✅ Code copied to clipboard!\n\nTo add your guide:\n\n1. Upload "${pdfFile}" to your GitHub "User Guide" folder\n\n2. Edit index.html on GitHub\n\n3. Find the guides array (around line 500)\n\n4. Add this code BEFORE the closing ];\n\n5. Don't forget to add a comma (,) after the previous guide!\n\n6. Commit changes\n\n7. Refresh your website after 1-2 minutes`);
-            
-            setTimeout(() => {
-                closeUploadModal();
-            }, 2000);
-        }
+function displayGuides(list) {
+    list.sort((a,b)=>new Date(b.updated)-new Date(a.updated));
+    const grid = document.getElementById('guidesGrid');
+    grid.innerHTML='';
+    document.getElementById('totalGuides').textContent=list.length;
 
-        // Search functionality
-        document.getElementById('searchInput').addEventListener('input', filterGuides);
+    list.forEach(g=>{
+        grid.innerHTML+=`
+        <div class="guide-card">
+            <span class="guide-category">${g.category}</span>
+            <h3 class="guide-title">
+                ${g.title}
+                ${isNew(g.updated)?'<span class="new-badge">NEW</span>':''}
+            </h3>
+            <p class="guide-description">${g.description}</p>
+            <div class="guide-footer">
+                <span title="Last updated">📅 ${formatDate(g.updated)}</span>
+                <a class="view-btn" href="${g.pdfUrl}" target="_blank" rel="noopener noreferrer">
+                    View Guide →
+                </a>
+            </div>
+        </div>`;
+    });
+}
 
-        // Initial display
-        displayGuides(guides);
-    </script>
+function filterGuides() {
+    const term = searchInput.value.toLowerCase();
+    displayGuides(guides.filter(g =>
+        (currentFilter==='all'||g.category===currentFilter) &&
+        (g.title.toLowerCase().includes(term)||g.description.toLowerCase().includes(term))
+    ));
+}
+
+function filterCategory(cat,e){
+    currentFilter=cat;
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    e.target.classList.add('active');
+    filterGuides();
+}
+
+searchInput.addEventListener('input',filterGuides);
+displayGuides(guides);
+</script>
+
 </body>
 </html>
